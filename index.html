@@ -25,9 +25,9 @@
     <div class="slides">
         <section>
             <h2 class="r-fit-text">Introduction to Go</h2>
-            <b style="display: inline-block" class="fragment fade-in">Ready</b>
-            <b style="display: inline-block" class="fragment fade-in">Steady</b>
-            <b style="display: inline-block" class="fragment fade-in">Go!</b>
+            <b style="display: inline-block" class="fragment">Ready</b>
+            <b style="display: inline-block" class="fragment">Steady</b>
+            <b style="display: inline-block" class="fragment">Go!</b>
         </section>
         <section>
             <h2>Who is talking to you</h2>
@@ -36,7 +36,7 @@
                 <div style="text-align: left; margin-left: 1em;">
                     <div>Sandro Preuß</div>
                     <div style="font-size: 0.7em; margin-top: 1em;">
-                        <div>Full Stack Swiss Army Knive</div>
+                        <div>Full Stack Swiss Army Knife</div>
                         <div style="font-size: 0.5em;">(Senior Software Developer)</div>
                         <div style="margin-top: 1em;">Team Architecture Consulting</div>
                         <div style="font-size: 0.5em;">currently supporting the Resy Team</div>
@@ -93,7 +93,7 @@
                         <li>built-in concurrency</li>
                         <li>garbage collection</li>
                     </ul>
-                    <ul>
+                    <ul class="fragment">
                         <li>powerful standard library</li>
                         <li>built-in testing library</li>
                         <li>built-in profiler</li>
@@ -109,13 +109,19 @@
             </section>
             <section>
                 <div style="position: relative;">
-                    <div><b>The Gopher Mascot</b></div>
-                    <img src="assets/gopher.png" height="30%" width="30%"/>
+                    <p><b>The Gopher Mascot</b></p>
+                    <img src="assets/gopher.png" height="30%" width="30%" style="margin-right: 50px"/>
+                    <img src="assets/pocket-gopher.png" height="30%" width="30%" class="fragment"/>
                 </div>
             </section>
             <section>
-                <pre>main.go</pre>
-                <pre>
+                <p><b>Used by</b></p>
+                <img src="assets/go-usage.png" height="464" width="1192"/>
+            </section>
+            <section>
+                <p><b>The Inevitable Example</b></p>
+                <pre >main.go</pre>
+                <pre class="fragment">
                     <code data-trim data-noescape data-line-numbers="|1|3|5,7|6|" class="language-go">
                         package main
 
@@ -211,10 +217,10 @@ hello audience</pre>
                     <b>Own Types</b>
                     <pre>
                         <code data-trim data-noescape class="language-go">
-                            // type definition
+                            // type definition; a new type based on an int
                             type CustomerNumber int
 
-                            // type alias
+                            // type alias; just a different name for the string type
                             type EMail = string
                         </code>
                     </pre>
@@ -223,12 +229,13 @@ hello audience</pre>
             <section>
                 <b>Variable and Constant Declarations</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go" data-line-numbers="1|2|3|4|5|7">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|2|3|5|6|8">
                         var value int            // empty integer, default value is 0
                         var value int = 42       // assigned integer value
                         var value = 42           // same with type inference
+
                         value := 42              // shorthand with type inference
-                        value1, value2 := 42, 99 // multiple declarations
+                        value, emoji := 42, "😎" // multiple declarations
 
                         const value = 42         // constant value, type inferred
                     </code>
@@ -237,21 +244,21 @@ hello audience</pre>
             <section>
                 <b>Arrays</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|1,2|1,3|1,4|1,6|1,7">
                         // An Array is just a fixed-size list of elements
                         var list [3]int         // array of length 3
                         list[0] = 1             // assign value to index 0
                         fmt.Println(list)       // => [1 0 0]
 
                         list := [3]int{1, 2, 3} // initialized with 3 elements
-                        fmt.Println(len(list))  // => 3
+                        fmt.Println(len(list))  // => 3 (len -> length)
                     </code>
                 </pre>
             </section>
             <section>
                 <b>Slices</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1,2|1,2,3|1,2,4,5|1,2,6|1,2,8|1,2,9|1,2,10|1,2,11|1,2,12">
                         // A Slice is a special representation
                         // of an array with a dynamic size
                         var slice []int              // empty slice
@@ -263,14 +270,14 @@ hello audience</pre>
                         slice = append(slice, 4)     // append value to slice
                         fmt.Println(slice)           // => [1 2 3 4]
                         fmt.Println(len(slice))      // => 4
-                        fmt.Println(slice[1:2])      // => [2]
+                        fmt.Println(slice[1:2])      // => [2] (slicing)
                     </code>
                 </pre>
             </section>
             <section>
                 <b>Maps</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go" data-line-numbers="">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|1,2|1,3|1,4|1,6|1,7|1,8|1,9|1,10,11">
                         // A Map is a collection of key-value pairs
                         var dict map[string]int           // empty map
                         dict := make(map[string]int)      // empty map
@@ -278,7 +285,7 @@ hello audience</pre>
 
                         dict["key"] = 42         // assign value to key
                         value := dict["key"]     // getting value of key
-                        value, ok := dict["key"] // getting value with check
+                        value, ok := dict["key"] // getting value, check existence
                         fmt.Println(value, ok)   // => 42 true
                         delete(dict, "key")      // delete key-value pair
                         clear(dict)              // clear all key-value pairs
@@ -288,7 +295,7 @@ hello audience</pre>
             <section>
                 <b>Structs</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go" data-line-numbers="1|2|3|4|5|7">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|1,2-6|1,8-12|1,13">
                         // A Struct is a collection of fields
                         type Session struct {
                             Name string
@@ -326,7 +333,7 @@ hello audience</pre>
                 <b>loops</b>
                 <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
                     <pre>
-                        <code data-trim data-noescape class="language-go">
+                        <code data-trim data-noescape class="language-go" data-line-numbers="1-3|5-7|9-11|13-15|">
                             for i := 0; i < 3; i++ {
                                 // ...
                             }
@@ -345,7 +352,7 @@ hello audience</pre>
                         </code>
                     </pre>
                     <pre class="fragment fade-in">
-                        <code data-trim data-noescape class="language-go">
+                        <code data-trim data-noescape class="language-go" data-line-numbers="1-5|7-11|13-14|">
                             list := []int{1, 2, 3}
                             for i, v := range list {
                                 // i ... index
@@ -375,7 +382,6 @@ hello audience</pre>
                 <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
                     <pre>
                         <code data-trim data-noescape class="language-go">
-                            // no break needed
                             switch weekday {
                             case time.Friday:
                                 // work & do not deploy
@@ -385,6 +391,8 @@ hello audience</pre>
                             default:
                                 // work
                             }
+
+                            // no break needed
                         </code>
                     </pre>
                     <pre class="fragment fade-in">
@@ -410,7 +418,7 @@ hello audience</pre>
             <section>
                 <b>Declaring Functions</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-3|5-7|9-12">
                         func start() {
                             // ...
                         }
@@ -429,16 +437,22 @@ hello audience</pre>
             <section>
                 <b>Declaring Functions on Structs</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-3|5,9|5-9|11-13|14-15">
                         type Session struct {
-                            Name string
-                            Room string
-                            Time time.Time
+                            Name string; Room string; Time time.Time
                         }
 
                         func (s Session) String() string {
-                            return fmt.Sprintf("%s in %s at %s", s.Name, s.Room, s.Time)
+                            t := s.Time.Format(time.DateTime)
+                            s := fmt.Sprintf("%s in %s at %s", s.Name, s.Room, t)
+                            return s
                         }
+
+                        s := Session{
+                            // ...
+                        }
+                        fmt.Println(s.String())
+                        // => Introduction to Go in Moritzburg at 2024-09-25 10:00:00
                     </code>
                 </pre>
             </section>
@@ -492,13 +506,40 @@ hello audience</pre>
         </section>
         <section>
             <h2>Language Specifics</h2>
-            <h4>Pointers, Errors, Concurrency</h4>
+            <h4>The Other Things</h4>
         </section>
         <section>
             <section>
+                <b>Visibility</b>
+                <p>
+                    <ul style="font-size: 0.7em">
+                        <li>visibility is determined by the upper and lower case of names</li>
+                        <li>if a name begins with an uppercase letter, it is exported<br>(accessible from other packages)</li>
+                        <li>if a name begins with a lower-case letter, it is private<br>(only visible within the same package)</li>
+                    </ul>
+                </p>
+                <pre class="fragment">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-7|8-13">
+                        // ./user/user.go
+                        package user
+
+                        type User struct { // User is exported
+                            Name   string  // exported field
+                            active bool    // private field
+                        }
+
+                        // ./main.go
+                        package main
+                        import "user"
+                        user := user.User{Name: "Alice"}
+                        user.active = true // not possible
+                    </code>
+                </pre>
+            </section>
+            <section>
                 <b>Pointers</b>
                 <pre>
-                    <code data-trim data-noescape class="language-go">
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-2|4|4,5|4,6|4,7|">
                         var pointer *int            // default value is nil
                         fmt.Println(pointer == nil) // => true
 
@@ -518,12 +559,123 @@ hello audience</pre>
             </section>
             <section>
                 <b>Interfaces</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-4|6|8|10-12|">
+                        // Stringer is an built-in interface
+                        type Stringer interface {
+                            String() string
+                        }
+
+                        type Session struct { /* ... */ }
+
+                        func (s Session) String() string { /* ... */ }
+
+                        func print(s Stringer) {
+                            fmt.Println(s.String())
+                        }
+                    </code>
+                </pre>
+                <div class="fragment">
+                    <ul>
+                        <li>no explicit implementation</li>
+                        <li>a type automatically fulfills an interface<br>when it implements the required functions</li>
+                    </ul>
+                    <p style="font-size: 0.5em">
+                        <a href="https://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go">How to use interfaces in Go</a>
+                    </p>
+                </div>
             </section>
             <section>
                 <b>Errors</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-3|5-12">
+                        package user
+
+                        func persist(u User) error { /* ... */ }
+
+                        func Create(name string) (User, error) {
+                            // ...
+                            err := persist(u)
+                            if err != nil {
+                                return User{}, err
+                            }
+                            return u, nil
+                        }
+                    </code>
+                </pre>
+                <div class="fragment" style="font-size: 0.7em">
+                    <ul>
+                        <li>no exceptions, only the build-in interface <code>error</code></li>
+                        <li>it’s idiomatic to communicate errors via an explicit, separate return value</li>
+                        <li>errors handled by using the same language constructs employed for other, non-error tasks</li>
+                        <li>errors can be wrapped</li>
+                    </ul>
+                </div>
             </section>
             <section>
-                <b>Concurrency</b>
+                <b>Concurrency - Go Routines</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1-3|5,13|6|7-10|11|12|">
+                        func f(from string) {
+                            fmt.Println(from)
+                        }
+
+                        func main() {
+                            f("direct")
+                            for i := range 10000 {
+                                from := fmt.Sprintf("goroutine %d", i)
+                                go f(from)
+                            }
+                            time.Sleep(3*time.Second)
+                            fmt.Println("done")
+                        }
+                    </code>
+                </pre>
+                <div class="fragment" style="font-size: 0.7em">
+                    <ul>
+                        <li><code>go</code> executes functions concurrent</li>
+                        <li>eponym of the language name</li>
+                        <li>simple syntax and efficient concurrency</li>
+                        <li>very lightweight (compared to threads)</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <b>Concurrency - Channels</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|3|5|">
+                        messages := make(chan string)
+
+                        go func() { messages <- "ping" }()
+
+                        msg := <-messages
+                    </code>
+                </pre>
+                <div class="fragment" style="font-size: 0.7em">
+                    <ul>
+                        <li>channels are the typed pipes that connect concurrent goroutines</li>
+                        <li>values can be send into channels from one goroutine and received in another goroutine</li>
+                        <li><code>channel <- value</code> syntax to send into a channel</li>
+                        <li><code><-channel</code> syntax to receive from a channel</li>
+                        <li>by default sends and receives block until both the sender and receiver are ready</li>
+                        <li>channels can be unbuffered (default) and buffered</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <b>There is still so much more</b>
+                <p>
+                    <div style="font-size: 0.7em">
+                        <ul>
+                            <li class="fragment">more on functions (variadic, <code>defer</code> keyword, closures)</li>
+                            <li class="fragment">struct embedding (composition; no inheritance in Go)</li>
+                            <li class="fragment">generics</li>
+                            <li class="fragment">more on channels and goroutines (<code>select</code> keyword)</li>
+                            <li class="fragment">tooling</li>
+                            <li class="fragment">...</li>
+                        </ul>
+                    </div>
+                </p>
             </section>
         </section>
         <section>
@@ -532,8 +684,17 @@ hello audience</pre>
         </section>
         <section>
             <section>
+                <b>My Developer Background<span style="font-size: 0.5em"> (excerpt)</span></b>
+                <p style="font-size: 0.3em">Important: no blaming</p>
+                <p class="fragment">Java</p>
+                <p class="fragment">Javascript</p>
+                <p class="fragment">Ruby</p>
+                <p class="fragment"><b>Go</b><span style="font-size: 0.7em">  👍</span></p>
+            </section>
+            <section>
+                <b>My Conclusion</b>
                 <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
-                    <div>
+                    <div class="fragment">
                         <ul>
                             <li>simple</li>
                             <li>easy to learn</li>
@@ -548,12 +709,15 @@ hello audience</pre>
                         </ul>
                     </div>
                 </div>
-                <div class="fragment" style="margin-top: 60px">
+                <div class="fragment" style="margin-top: 30px">
                     <ul style="list-style-type: none;">
+                        <li>Impact</li>
                         <li><b>=> productivity</b></li>
                         <li><b>=> quality</b></li>
                         <li><b>=> fast onboarding</b></li>
-                        <li class="fragment" style="margin-top: 40px"><b>=> scripting, CLI, business</b></li>
+                        <li class="fragment" style="margin-top: 30px">Usable for</li>
+                        <li class="fragment"><b>=> scripting, CLI</b></li>
+                        <li class="fragment"><b>=> business applications</b></li>
                     </ul>
                 </div>
             </section>
@@ -564,11 +728,11 @@ hello audience</pre>
         </section>
         <section>
             <section>
-                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; align-items: center; gap: 30px;">
                     <div>
-                        <img src="assets/gopher-motorcycle.svg" height="70%" width="70%"/>
+                        <img src="assets/gopher-motorcycle.png" height="50%"/>
                     </div>
-                    <div>
+                    <div style="font-size: 0.8em">
                         <b></b>
                         <ul>
                             <li class="fragment"><a href="https://go.dev/doc/">Go Website</a></li>
@@ -576,7 +740,8 @@ hello audience</pre>
                             <li class="fragment"><a href="https://gobyexample.com/">Go by Example</a><span style="font-size: 0.5em"> (Step by step learning)</span></li>
                             <li class="fragment"><a href="https://go.dev/play/">Go Playground</a><span style="font-size: 0.5em"> (Interactive runtime env)</span></li>
                             <li class="fragment"><a href="https://go-proverbs.github.io/">Go Proverbs</a><span style="font-size: 0.5em"> (Simple, Poetic, Pithy)</span></li>
-                            <li class="fragment">
+                            <li class="fragment"><a href="https://www.youtube.com/watch?v=8uiZC0l4Ajw">Video Tutorial</a><span style="font-size: 0.5em"> (YouTube)</span></li>
+                            <li class="fragment" style="margin-top: 20px">
                                 IDEs
                                 <ul>
                                     <li><a href="https://www.jetbrains.com/go/">GoLand</a></li>
