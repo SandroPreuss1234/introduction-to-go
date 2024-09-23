@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Introduction to Go</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/dracula.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <style>
+        .left {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2 class="r-fit-text">Introduction to Go</h2>
+            <b style="display: inline-block" class="fragment fade-in">Ready</b>
+            <b style="display: inline-block" class="fragment fade-in">Steady</b>
+            <b style="display: inline-block" class="fragment fade-in">Go!</b>
+        </section>
+        <section>
+            <h2>Who is talking to you</h2>
+            <div style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items: center">
+                <img src="assets/me.jpg" height="20%" width="20%"/>
+                <div style="text-align: left; margin-left: 1em;">
+                    <div>Sandro Preuß</div>
+                    <div style="font-size: 0.7em; margin-top: 1em;">
+                        <div>Full Stack Swiss Army Knive</div>
+                        <div style="font-size: 0.5em;">(Senior Software Developer)</div>
+                        <div style="margin-top: 1em;">Team Architecture Consulting</div>
+                        <div style="font-size: 0.5em;">currently supporting the Resy Team</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Topics</h2>
+            <ol>
+                <li>About Go</li>
+                <li>Types and Syntax</li>
+                <li>Language Specifics</li>
+                <li>Personal Opinion</li>
+                <li>How to Start</li>
+            </ol>
+        </section>
+        <section>
+            <h2>About Go</h2>
+            <h4>The Why - The How - The What</h4>
+        </section>
+        <section>
+            <section>
+                <img src="assets/fathers-of-go.png" height=" 50%" width="50%"/>
+                <ul>
+                    <li>Designed at Google in 2007</li>
+                    <li>Presented 2009 within a Google Tech Talk</li>
+                    <li>v1.0 released in 2012</li>
+                    <li>Current stable release v1.23</li>
+                </ul>
+            </section>
+            <section>
+                <p class="left"><b>Motivation</b></p>
+                <ul>
+                    <li>Its designers were primarily motivated by their shared dislike of C++</li>
+                </ul>
+                <p class="left"><b>Design Goals</b></p>
+                <ul>
+                    <li>Static typing and run-time efficiency (like C)</li>
+                    <li>Readability and usability (like Python)</li>
+                    <li>High-performance networking and multiprocessing</li>
+                </ul>
+                <p style="font-size: 0.5em">
+                    <a href="https://go.dev/talks/2012/splash.article">Go Language Design</a>
+                </p>
+            </section>
+            <section>
+                <p><b>What we've got</b></p>
+                <div style="display: flex; flex-direction: row; justify-content: space-around">
+                    <ul>
+                        <li>statically typed</li>
+                        <li>strongly typed</li>
+                        <li>compiled (fast compile time)</li>
+                        <li>built-in concurrency</li>
+                        <li>garbage collection</li>
+                    </ul>
+                    <ul>
+                        <li>powerful standard library</li>
+                        <li>built-in testing library</li>
+                        <li>built-in profiler</li>
+                        <li>built-in benchmarking</li>
+                        <li>tooling
+                            <pre style="display: inline"><code>go mod, go vet, go fmt</code></pre>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fragment fade-up">
+                    <p><b>SIMPLICITY</b></p>
+                </div>
+            </section>
+            <section>
+                <div style="position: relative;">
+                    <div><b>The Gopher Mascot</b></div>
+                    <img src="assets/gopher.png" height="30%" width="30%"/>
+                </div>
+            </section>
+            <section>
+                <pre>main.go</pre>
+                <pre>
+                    <code data-trim data-noescape data-line-numbers="|1|3|5,7|6|" class="language-go">
+                        package main
+
+                        import "fmt"
+
+                        func main() {
+                            fmt.Println("hello audience")
+                        }
+                    </code>
+                </pre>
+                <div class="fragment fade-up">
+                    <pre>
+$ go run main.go
+hello audience</pre>
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>Types and Syntax</h2>
+            <h4>25 Keywords to Rule the World</h4>
+        </section>
+        <section>
+            <section>
+                <b>Keywords</b>
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // declaration
+                            const
+                            func
+                            import
+                            package
+                            type
+                            var
+                        </code>
+                    </pre>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // type denotations
+                            chan
+                            interface
+                            map
+                            struct
+                        </code>
+                    </pre>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // control flow
+                            if else
+                            switch case default
+                            break continue fallthrough
+                            for goto range
+                            return
+                            select
+                        </code>
+                    </pre>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // function call
+                            // control flow
+                            defer
+                            go
+                        </code>
+                    </pre>
+                </div>
+                <div style="font-size: 0.7rem">
+                    <table>
+                        <tr><td>C# (8.0)</td><td>107</td></tr>
+                        <tr><td>Kotlin (1.4)</td><td>79</td></tr>
+                        <tr><td>C++ (98)</td><td>74</td></tr>
+                        <tr><td>Java (SE 17 LTS)</td><td>67</td></tr>
+                        <tr><td>Python (3)</td><td>38</td></tr>
+                        <tr><td>C (ANSI)</td><td>32</td></tr>
+                        <tr><td>Go (1.23)</td><td>25</td></tr>
+                    </table>
+                    <a href="https://github.com/e3b0c442/keywords">(source)</a>
+                </div>
+            </section>
+            <section>
+                <b>Basic Types</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        bool
+                        string
+                        (u)int, (u)int8, (u)int16, (u)int32, (u)int64
+                        byte // (alias for uint8)
+                        rune // (alias for int32, represents a Unicode code point)
+                        float32, float64
+                        complex64, complex128
+                    </code>
+                </pre>
+                <div class="fragment fade-up">
+                    <b>Own Types</b>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // type definition
+                            type CustomerNumber int
+
+                            // type alias
+                            type EMail = string
+                        </code>
+                    </pre>
+                </div>
+            </section>
+            <section>
+                <b>Variable and Constant Declarations</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|2|3|4|5|7">
+                        var value int            // empty integer, default value is 0
+                        var value int = 42       // assigned integer value
+                        var value = 42           // same with type inference
+                        value := 42              // shorthand with type inference
+                        value1, value2 := 42, 99 // multiple declarations
+
+                        const value = 42         // constant value, type inferred
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>Arrays</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        // An Array is just a fixed-size list of elements
+                        var list [3]int         // array of length 3
+                        list[0] = 1             // assign value to index 0
+                        fmt.Println(list)       // => [1 0 0]
+
+                        list := [3]int{1, 2, 3} // initialized with 3 elements
+                        fmt.Println(len(list))  // => 3
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>Slices</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        // A Slice is a special representation
+                        // of an array with a dynamic size
+                        var slice []int              // empty slice
+                        slice := make([]int)         // empty slice
+                        slice := make([]int, 0, 100) // empty slice with capacity=100
+                        slice[0] = 1                 // assign value to index 0
+
+                        slice := []int{1, 2, 3}      // initialized with 3 elements
+                        slice = append(slice, 4)     // append value to slice
+                        fmt.Println(slice)           // => [1 2 3 4]
+                        fmt.Println(len(slice))      // => 4
+                        fmt.Println(slice[1:2])      // => [2]
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>Maps</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="">
+                        // A Map is a collection of key-value pairs
+                        var dict map[string]int           // empty map
+                        dict := make(map[string]int)      // empty map
+                        dict := map[string]int{"key": 42} // initialized
+
+                        dict["key"] = 42         // assign value to key
+                        value := dict["key"]     // getting value of key
+                        value, ok := dict["key"] // getting value with check
+                        fmt.Println(value, ok)   // => 42 true
+                        delete(dict, "key")      // delete key-value pair
+                        clear(dict)              // clear all key-value pairs
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>Structs</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go" data-line-numbers="1|2|3|4|5|7">
+                        // A Struct is a collection of fields
+                        type Session struct {
+                            Name string
+                            Room string
+                            Time time.Time
+                        }
+
+                        session := Session{
+                            Name: "Introduction to Go",
+                            Room: "Moritzburg",
+                            Time: time.Date(2024, 9, 25, 10, 0, 0, 0, time.UTC),
+                        }
+                        session.Time = time.Now()
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>if / else</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        // no need for clamps around conditions
+                        if a == b {
+                            // ...
+                        } else if b == c {
+                            // ...
+                        } else {
+                            // ...
+                        }
+
+                        // There is no ternary if in Go!
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>loops</b>
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            for i := 0; i < 3; i++ {
+                                // ...
+                            }
+
+                            for i <= 3 {
+                                i = i + 1
+                            }
+
+                            for {
+                                // ...
+                            }
+
+                            for i := range 3 {
+                                // ...
+                            }
+                        </code>
+                    </pre>
+                    <pre class="fragment fade-in">
+                        <code data-trim data-noescape class="language-go">
+                            list := []int{1, 2, 3}
+                            for i, v := range list {
+                                // i ... index
+                                // v ... value
+                            }
+
+                            dict := map[string]int{"key": 1}
+                            for k, v := range dict {
+                                // k ... key
+                                // v ... value
+                            }
+
+                            // break / continue are possible
+                            // as usual inside loops
+                        </code>
+                    </pre>
+                </div>
+                <div class="fragment fade-in" style="font-size: 0.9rem; width: 60%; margin: auto">
+                    There is also a <code>goto</code> statement available, which you can use with <code>myLabel:</code>
+                    for unconditional jumps from the goto to the labeled statement in the same function.
+                    <br><em>Note:</em> Use of the goto statement is highly discouraged in any programming language
+                    because it becomes difficult to trace the control flow of a program.
+                </div>
+            </section>
+            <section>
+                <b>switch / case</b>
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // no break needed
+                            switch weekday {
+                            case time.Friday:
+                                // work & do not deploy
+                            case time.Saturday,
+                                 time.Sunday:
+                                // relax
+                            default:
+                                // work
+                            }
+                        </code>
+                    </pre>
+                    <pre class="fragment fade-in">
+                        <code data-trim data-noescape class="language-go">
+                            // without expression
+                            switch {
+                            case mealType == "breakfast":
+                                // eat
+                                fallthrough
+                            case mealType == "coffee":
+                                if noCoffee {
+                                    // for tea drinkers
+                                    break
+                                }
+                                // drink
+                            default:
+                                // not hungry/thirsty
+                            }
+                        </code>
+                    </pre>
+                </div>
+            </section>
+            <section>
+                <b>Declaring Functions</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        func start() {
+                            // ...
+                        }
+
+                        func add(a int, b int) int {
+                            return a + b
+                        }
+
+                        func add(a, b int) (sum int) {
+                            sum = a + b
+                            return
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>Declaring Functions on Structs</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        type Session struct {
+                            Name string
+                            Room string
+                            Time time.Time
+                        }
+
+                        func (s Session) String() string {
+                            return fmt.Sprintf("%s in %s at %s", s.Name, s.Room, s.Time)
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>Keywords<bs style="font-size: 0.5em"> (so far)</bs></b>
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // declaration
+                            &#10003; const
+                            &#10003; func
+                            &#10003; import
+                            &#10003; package
+                            &#10003; type
+                            &#10003; var
+                        </code>
+                    </pre>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // type denotations
+                            chan
+                            interface
+                            &#10003; map
+                            &#10003; struct
+                        </code>
+                    </pre>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // control flow
+                            &#10003; if else
+                            &#10003; switch case default
+                            &#10003; break continue fallthrough
+                            &#10003; for goto range
+                            &#10003; return
+                            select
+                        </code>
+                    </pre>
+                    <pre>
+                        <code data-trim data-noescape class="language-go">
+                            // function call
+                            // control flow
+                            defer
+                            go
+                        </code>
+                    </pre>
+                </div>
+                <div class="fragment fade-in">
+                    You have already learned about 80% of the syntax elements in Go!
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>Language Specifics</h2>
+            <h4>Pointers, Errors, Concurrency</h4>
+        </section>
+        <section>
+            <section>
+                <b>Pointers</b>
+                <pre>
+                    <code data-trim data-noescape class="language-go">
+                        var pointer *int            // default value is nil
+                        fmt.Println(pointer == nil) // => true
+
+                        value := 1
+                        pointer = value  // not possible, int vs *int
+                        pointer = &value // possible, pointing to the address of value
+                        *pointer = value // possible, dereferencing to current value
+                    </code>
+                </pre>
+                <div class="fragment">
+                    <ul>
+                        <li>no pointer arithmetics</li>
+                        <li>no manual memory management</li>
+                        <li>pointer parameters of functions are "pass by value" </li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <b>Interfaces</b>
+            </section>
+            <section>
+                <b>Errors</b>
+            </section>
+            <section>
+                <b>Concurrency</b>
+            </section>
+        </section>
+        <section>
+            <h2>Personal Opinion</h2>
+            <h4>My Subjective Impression</h4>
+        </section>
+        <section>
+            <section>
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                    <div>
+                        <ul>
+                            <li>simple</li>
+                            <li>easy to learn</li>
+                            <li>=> pure fun</li>
+                        </ul>
+                    </div>
+                    <div class="fragment">
+                        <ul style="margin-left: 100px">
+                            <li>compact code</li>
+                            <li>structured code</li>
+                            <li>=> easy to understand</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fragment" style="margin-top: 60px">
+                    <ul style="list-style-type: none;">
+                        <li><b>=> productivity</b></li>
+                        <li><b>=> quality</b></li>
+                        <li><b>=> fast onboarding</b></li>
+                        <li class="fragment" style="margin-top: 40px"><b>=> scripting, CLI, business</b></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>How to Start</h2>
+            <h4>You got me - let's Go and develop something</h4>
+        </section>
+        <section>
+            <section>
+                <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                    <div>
+                        <img src="assets/gopher-motorcycle.svg" height="70%" width="70%"/>
+                    </div>
+                    <div>
+                        <b></b>
+                        <ul>
+                            <li class="fragment"><a href="https://go.dev/doc/">Go Website</a></li>
+                            <li class="fragment"><a href="https://go.dev/doc/">Go Docs</a></li>
+                            <li class="fragment"><a href="https://gobyexample.com/">Go by Example</a><span style="font-size: 0.5em"> (Step by step learning)</span></li>
+                            <li class="fragment"><a href="https://go.dev/play/">Go Playground</a><span style="font-size: 0.5em"> (Interactive runtime env)</span></li>
+                            <li class="fragment"><a href="https://go-proverbs.github.io/">Go Proverbs</a><span style="font-size: 0.5em"> (Simple, Poetic, Pithy)</span></li>
+                            <li class="fragment">
+                                IDEs
+                                <ul>
+                                    <li><a href="https://www.jetbrains.com/go/">GoLand</a></li>
+                                    <li><a href="https://code.visualstudio.com/docs/languages/go">VS Code</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section>
+            <h2>THANK YOU</h2>
+            <h4>For Joining and Listening</h4>
+            <div style="display: flex; flex-wrap: nowrap; flex-direction: row; justify-content: center; gap: 30px;">
+                <div class="fragment fade-right" data-fragment-index="2">
+                    <img src="assets/gopher-no.png" height="70%" width="70%"/>
+                </div>
+                <p class="fragment fade-up" data-fragment-index="1">
+                    <b>Feedback welcome!</b>
+                    <span style="font-size: 0.7em">E.g., ask yourself:<br>Have I learned something new today?</span>
+                </p>
+                <div class="fragment fade-left" data-fragment-index="3">
+                    <img src="assets/gopher-yes.png" height="70%" width="70%"/>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+  // More info about initialization & config:
+  // - https://revealjs.com/initialization/
+  // - https://revealjs.com/config/
+  Reveal.initialize({
+    hash: true,
+
+    // Learn about plugins: https://revealjs.com/plugins/
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+    slideNumber: 'c/t',
+    // center: false,
+  });
+</script>
+</body>
+
+</html>
